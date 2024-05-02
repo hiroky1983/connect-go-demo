@@ -1,6 +1,11 @@
 version: "3.8"
 services:
-  server:
-    build: ./server
+  app:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    volumes:
+      - ./server:/app
+    working_dir: /app
     ports:
       - "8001:8001"
