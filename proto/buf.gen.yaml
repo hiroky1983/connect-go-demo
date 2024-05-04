@@ -1,0 +1,22 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: connect-go-demo/server
+plugins:
+  - plugin: buf.build/connectrpc/go:v1.11.0
+    out: ../server/gen
+    opt:
+      - paths=source_relative
+  # dependencies
+  - plugin: buf.build/protocolbuffers/go:v1.30.0
+    out: ../server/gen/gen
+    opt:
+      - paths=source_relative
+  - plugin: buf.build/connectrpc/es:v1.0.0
+    out: ../front/gen
+    opt: target=ts
+  # dependencies
+  - plugin: buf.build/bufbuild/es:v1.3.0
+    out: ../next/packages/gen
+    opt: target=ts
